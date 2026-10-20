@@ -1071,7 +1071,7 @@ fun SettingsTabContent(
                                     color = MaterialTheme.colorScheme.onErrorContainer,
                                 )
                                 Text(
-                                    "Без них не видно статус туннеля, капчу и вход VK. На Xiaomi/Samsung включите уведомления для qWDTT вручную.",
+                                    "Без них не видно статус туннеля, капчу и вход VK. На Xiaomi/Samsung включите уведомления для GLEBSBP вручную.",
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.onErrorContainer,
                                 )
@@ -1503,7 +1503,7 @@ fun SettingsTabContent(
                         ) {
                             Column {
                                 Text(
-                                    text = "qWDTT",
+                                    text = "GLEBSBP",
                                     style = MaterialTheme.typography.bodyLarge,
                                     fontWeight = FontWeight.Bold
                                 )
@@ -1535,7 +1535,7 @@ fun SettingsTabContent(
 
                                 OutlinedButton(
                                     onClick = {
-                                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/SpaceNeuroX/proxy-turn-vk-android"))
+                                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/GLEBSBP_bot/sbp"))
                                         context.startActivity(intent)
                                     },
                                     shape = RoundedCornerShape(8.dp),
@@ -1749,14 +1749,14 @@ fun SettingsTabContent(
                         OutlinedButton(
                             onClick = {
                                 val reportText = """
-                                    Приложение: qWDTT
+                                    Приложение: GLEBSBP
                                     Версия: $currentVersion
                                     Android API: ${Build.VERSION.SDK_INT}
                                     Архитектура (ABI): ${Build.SUPPORTED_ABIS.firstOrNull() ?: "unknown"}
                                     Устройство: ${Build.MANUFACTURER} ${Build.MODEL}
                                 """.trimIndent()
                                 val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                                clipboard.setPrimaryClip(ClipData.newPlainText("qWDTT Report", reportText))
+                                clipboard.setPrimaryClip(ClipData.newPlainText("GLEBSBP Report", reportText))
                                 Toast.makeText(context, "Отчёт о системе скопирован!", Toast.LENGTH_SHORT).show()
                             },
                             modifier = Modifier.fillMaxWidth(),
@@ -1797,7 +1797,7 @@ fun SettingsTabContent(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "qWDTT",
+                text = "GLEBSBP",
                 style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.ExtraBold),
                 color = MaterialTheme.colorScheme.primary
             )

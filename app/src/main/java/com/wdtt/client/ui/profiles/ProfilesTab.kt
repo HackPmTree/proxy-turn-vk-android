@@ -974,7 +974,7 @@ fun ProfilesTab(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     Text(
-                        "qWDTT автоматически считывает и импортирует настройки из ссылок, файлов и QR-кодов.",
+                        "GLEBSBP автоматически считывает и импортирует настройки из ссылок, файлов и QR-кодов.",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -988,7 +988,7 @@ fun ProfilesTab(
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Text(
-                                "qwdtt://config?peer=IP:порт&pass=пароль&workers=потоки&port=локальный_порт&name=имя&hashes=vk_хеши",
+                                "glebsbp://config?peer=IP:порт&pass=пароль&workers=потоки&port=локальный_порт&name=имя&hashes=vk_хеши",
                                 style = MaterialTheme.typography.bodySmall,
                                 modifier = Modifier.padding(12.dp).horizontalScroll(rememberScrollState()),
                                 fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
@@ -2043,9 +2043,9 @@ private fun parseQrConfig(rawText: String): ConnectionProfile? {
     }
 
     // 1. Try URL scheme
-    if (trimmed.startsWith("qwdtt://config") || trimmed.startsWith("qwdtt:config")) {
+    if (trimmed.startsWith("glebsbp://config") || trimmed.startsWith("glebsbp:config")) {
         try {
-            val uri = android.net.Uri.parse(trimmed.replace("qwdtt:config", "qwdtt://config"))
+            val uri = android.net.Uri.parse(trimmed.replace("glebsbp:config", "glebsbp://config"))
             val name = uri.getQueryParameter("name") ?: "QR Профиль"
             val peerRaw = uri.getQueryParameter("peer") ?: return null
             val dtlsPortParam = uri.getQueryParameter("dtls_port") ?: uri.getQueryParameter("server_port")

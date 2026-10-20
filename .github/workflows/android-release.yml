@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - name: Check out source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -36,19 +36,31 @@ jobs:
           test "$version" = "$gradle_version"
 
       - name: Set up Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "17"
           cache: gradle
 
       - name: Set up Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v6
         with:
           go-version: "1.26.x"
-          cache-dependency-path: |
-            go.sum
-            go_client/go.sum
+          check-latest: true
+          cache-dependency-path: go_client/go.sum
+
+      - name: Rebase Go modules (fix drifted go.sum)
+        shell: bash
+        run: |
+          # Если go.sum в репозитории рассинхронизирован с импортами кода,
+          # пересобираем его до сборки APK, чтобы gradlew не упал на missing go.sum entry
+          set -euo pipefail
+          if ! (cd go_client && go mod verify >/dev/null 2>&1 \
+                && go list -deps -e ./... >/dev/null 2>&1); then
+            echo "go.sum drift detected, running go mod tidy..."
+            (cd go_client && go mod tidy)
+          fi
+          (cd go_client && go mod download)
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
@@ -68,7 +80,7 @@ jobs:
           test -n "$KEYSTORE_PASSWORD"
           test -n "$KEY_ALIAS"
           test -n "$KEY_PASSWORD"
-          keystore="$RUNNER_TEMP/qwdtt-release.jks"
+          keystore="$RUNNER_TEMP/glebsbp-release.jks"
           printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$keystore"
           printf '%s\n' \
             "KEYSTORE_FILE=$keystore" \
@@ -91,7 +103,7 @@ jobs:
             base="$(basename "$apk")"
             arch="${base#app-}"
             arch="${arch%-release.apk}"
-            cp "$apk" "dist/qwdtt-${version}-${arch}.apk"
+            cp "$apk" "dist/glebsbp-${version}-${arch}.apk"
             found=1
           done
           test "$found" = 1
@@ -103,7 +115,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          args=(--title "qWDTT ${GITHUB_REF_NAME}" --generate-notes)
+          args=(--title "GLEBSBP ${GITHUB_REF_NAME}" --generate-notes)
           case "$GITHUB_REF_NAME" in
             *-alpha*|*-beta*|*-rc*) args+=(--prerelease) ;;
           esac

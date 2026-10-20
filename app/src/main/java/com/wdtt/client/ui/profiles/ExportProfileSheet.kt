@@ -52,7 +52,7 @@ fun ExportProfileSheet(
         val peerEsc = URLEncoder.encode(exportPeer, "UTF-8")
         val hashesEsc = URLEncoder.encode(profile.vkHashes, "UTF-8")
         val passEsc = URLEncoder.encode(profile.password, "UTF-8")
-        "qwdtt://config?name=$nameEsc&peer=$peerEsc&hashes=$hashesEsc&workers=${profile.workersPerHash}&port=${profile.listenPort}&pass=$passEsc"
+        "glebsbp://config?name=$nameEsc&peer=$peerEsc&hashes=$hashesEsc&workers=${profile.workersPerHash}&port=${profile.listenPort}&pass=$passEsc"
     }
 
     LaunchedEffect(link) {
@@ -142,7 +142,7 @@ fun ExportProfileSheet(
 
             Spacer(modifier = Modifier.height(24.dp))
             Text(
-                "Отсканируйте код другим устройством в приложении qWDTT",
+                "Отсканируйте код другим устройством в приложении GLEBSBP",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center

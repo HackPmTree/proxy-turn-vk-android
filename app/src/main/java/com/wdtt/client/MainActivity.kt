@@ -129,7 +129,7 @@ class MainActivity : ComponentActivity() {
         // Статическая ссылка на текущую Activity
         var currentActivity: MainActivity? = null
 
-        // URI файла .qwdtt, ожидающего импорта
+        // URI файла .glebsbp, ожидающего импорта
         val pendingFileUri = mutableStateOf<Uri?>(null)
 
     }
