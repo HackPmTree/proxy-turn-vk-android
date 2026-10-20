@@ -9,7 +9,7 @@ import org.json.JSONObject
  * Обмен настройками обхода VPN (домены/IP и/или исключения приложений).
  */
 object BypassShare {
-    const val FORMAT = "qwdtt-bypass"
+    const val FORMAT = "glebsbp-bypass"
     const val FORMAT_VERSION = 1
 
     enum class Scope {
@@ -107,7 +107,7 @@ object BypassShare {
         val root = runCatching { JSONObject(text) }.getOrNull()
         val format = root?.optString("format", "").orEmpty()
         if (format.isNotEmpty() && format != FORMAT) {
-            throw IllegalArgumentException("Это не файл обхода qWDTT (format=$format)")
+            throw IllegalArgumentException("Это не файл обхода GLEBSBP (format=$format)")
         }
 
         val isJsonBypass = root != null &&

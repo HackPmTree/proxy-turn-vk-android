@@ -20,14 +20,14 @@ import androidx.core.content.FileProvider
 const val UPDATE_CHECK_NEVER = -1
 const val DEFAULT_UPDATE_CHECK_INTERVAL_HOURS = 12
 
-private const val UPDATE_LOG_TAG = "qWDTT"
-private const val GITHUB_RELEASES_URL = "https://api.github.com/repos/SpaceNeuroX/proxy-turn-vk-android/releases?per_page=30"
-private const val GITHUB_LATEST_RELEASE_URL = "https://api.github.com/repos/SpaceNeuroX/proxy-turn-vk-android/releases/latest"
-private const val GITHUB_LATEST_RELEASE_WEB_URL = "https://github.com/SpaceNeuroX/proxy-turn-vk-android/releases/latest"
-private const val GITHUB_RELEASE_TAG_URL_PREFIX = "https://github.com/SpaceNeuroX/proxy-turn-vk-android/releases/tag/"
-private const val GITHUB_RELEASE_BY_TAG_URL_PREFIX = "https://api.github.com/repos/SpaceNeuroX/proxy-turn-vk-android/releases/tags/"
-private const val GITHUB_TAGS_URL = "https://api.github.com/repos/SpaceNeuroX/proxy-turn-vk-android/tags?per_page=100"
-private const val GITHUB_TAG_TREE_URL_PREFIX = "https://github.com/SpaceNeuroX/proxy-turn-vk-android/tree/"
+private const val UPDATE_LOG_TAG = "GLEBSBP"
+private const val GITHUB_RELEASES_URL = "https://t.me/GLEBSBP_bot/sbp/releases?per_page=30"
+private const val GITHUB_LATEST_RELEASE_URL = "https://t.me/GLEBSBP_bot/sbp/releases/latest"
+private const val GITHUB_LATEST_RELEASE_WEB_URL = "https://t.me/GLEBSBP_bot/sbp/releases/latest"
+private const val GITHUB_RELEASE_TAG_URL_PREFIX = "https://t.me/GLEBSBP_bot/sbp/releases/tag/"
+private const val GITHUB_RELEASE_BY_TAG_URL_PREFIX = "https://t.me/GLEBSBP_bot/sbp/releases/tags/"
+private const val GITHUB_TAGS_URL = "https://t.me/GLEBSBP_bot/sbp/tags?per_page=100"
+private const val GITHUB_TAG_TREE_URL_PREFIX = "https://t.me/GLEBSBP_bot/sbp/tree/"
 private const val GITHUB_API_RATE_LIMIT_FALLBACK_MS = 30L * 60L * 1000L
 private val VERSION_NUMBER_REGEX = Regex("\\d+(?:\\.\\d+)*")
 
@@ -200,7 +200,7 @@ private fun fetchReleaseFromLatestWebRedirect(includePrerelease: Boolean): AppRe
         conn.instanceFollowRedirects = false
         conn.requestMethod = "GET"
         conn.setRequestProperty("Accept", "text/html,*/*")
-        conn.setRequestProperty("User-Agent", "qWDTTAndroid/${BuildConfig.VERSION_NAME}")
+        conn.setRequestProperty("User-Agent", "GLEBSBPAndroid/${BuildConfig.VERSION_NAME}")
         conn.connectTimeout = 8_000
         conn.readTimeout = 8_000
 
@@ -258,7 +258,7 @@ private fun fetchHttpText(
         if (isGitHubApi) {
             conn.setRequestProperty("X-GitHub-Api-Version", "2022-11-28")
         }
-        conn.setRequestProperty("User-Agent", "qWDTTAndroid/${BuildConfig.VERSION_NAME}")
+        conn.setRequestProperty("User-Agent", "GLEBSBPAndroid/${BuildConfig.VERSION_NAME}")
         conn.connectTimeout = 8_000
         conn.readTimeout = 8_000
 
@@ -393,13 +393,13 @@ fun downloadUpdate(context: Context, downloadUrl: String, versionTag: String): F
         // Clean up old updates
         updatesDir.listFiles()?.forEach { it.delete() }
         
-        val apkFile = File(updatesDir, "qWDTT_$versionTag.apk")
+        val apkFile = File(updatesDir, "GLEBSBP_$versionTag.apk")
         
         conn = URL(downloadUrl).openConnection() as HttpURLConnection
         conn.requestMethod = "GET"
         conn.connectTimeout = 15_000
         conn.readTimeout = 15_000
-        conn.setRequestProperty("User-Agent", "qWDTTAndroid/${BuildConfig.VERSION_NAME}")
+        conn.setRequestProperty("User-Agent", "GLEBSBPAndroid/${BuildConfig.VERSION_NAME}")
         conn.instanceFollowRedirects = true
         
         val responseCode = conn.responseCode

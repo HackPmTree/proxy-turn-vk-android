@@ -687,7 +687,7 @@ fun ExceptionsTab() {
                             BypassShare.Scope.Routes -> "sites"
                             BypassShare.Scope.Apps -> "apps"
                         }
-                        exportLauncher.launch("qwdtt_bypass_${suffix}_$stamp.json")
+                        exportLauncher.launch("glebsbp_bypass_${suffix}_$stamp.json")
                     }
                 ) { Text("Сохранить") }
             },

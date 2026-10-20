@@ -63,14 +63,14 @@ fun SupportNoticeDialog(
                     )
                     androidx.compose.foundation.layout.Spacer(Modifier.width(10.dp))
                     Text(
-                        text = "qWDTT $versionName",
+                        text = "GLEBSBP $versionName",
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                     )
                 }
 
                 Text(
-                    text = "Спасибо, что пользуетесь qWDTT! Если приложение помогает — вы можете поддержать разработку донатом. Это необязательно, но очень мотивирует.",
+                    text = "Спасибо, что пользуетесь GLEBSBP! Если приложение помогает — вы можете поддержать разработку донатом. Это необязательно, но очень мотивирует.",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )

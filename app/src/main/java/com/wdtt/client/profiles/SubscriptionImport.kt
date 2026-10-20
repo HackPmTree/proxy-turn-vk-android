@@ -31,7 +31,7 @@ object SubscriptionImport {
                 readTimeout = 20_000
                 requestMethod = "GET"
                 setRequestProperty("Accept", "application/json, text/plain, */*")
-                setRequestProperty("User-Agent", "qWDTT-Subscription/1.0")
+                setRequestProperty("User-Agent", "GLEBSBP-Subscription/1.0")
             }
             val code = conn.responseCode
             if (code !in 200..299) {
@@ -56,7 +56,7 @@ object SubscriptionImport {
         if (trimmed.isEmpty()) return null
 
         var jsonStr = trimmed
-        if (!trimmed.startsWith("[") && !trimmed.startsWith("{") && !trimmed.startsWith("qwdtt:")) {
+        if (!trimmed.startsWith("[") && !trimmed.startsWith("{") && !trimmed.startsWith("glebsbp:")) {
             try {
                 val decoded = android.util.Base64.decode(trimmed, android.util.Base64.DEFAULT)
                 jsonStr = String(decoded, Charsets.UTF_8).trim()
@@ -64,7 +64,7 @@ object SubscriptionImport {
             }
         }
 
-        if (jsonStr.startsWith("qwdtt://config") || jsonStr.startsWith("qwdtt:config")) {
+        if (jsonStr.startsWith("glebsbp://config") || jsonStr.startsWith("glebsbp:config")) {
             val single = parseQwdttUri(jsonStr) ?: return null
             return ParsedRemoteSubscription(profiles = listOf(single), subscriptionName = single.name)
         }
@@ -166,7 +166,7 @@ object SubscriptionImport {
 
     private fun parseQwdttUri(trimmed: String): ConnectionProfile? {
         return try {
-            val uri = android.net.Uri.parse(trimmed.replace("qwdtt:config", "qwdtt://config"))
+            val uri = android.net.Uri.parse(trimmed.replace("glebsbp:config", "glebsbp://config"))
             val name = uri.getQueryParameter("name") ?: "QR Профиль"
             val peer = uri.getQueryParameter("peer") ?: return null
             val hashes = uri.getQueryParameter("hashes") ?: ""

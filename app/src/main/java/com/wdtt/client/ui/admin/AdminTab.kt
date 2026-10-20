@@ -746,7 +746,7 @@ private fun PasswordFormSheet(
 }
 
 /**
- * Клик по карточке — сразу готовые ссылки qWDTT (qwdtt://config, наш
+ * Клик по карточке — сразу готовые ссылки GLEBSBP (glebsbp://config, наш
  * основной формат с QR) и легаси WDTT (wdtt://host:port:port:port:pass:hash,
  * см. parseQrConfig в ProfilesTab.kt) плюс QR-код на первую из них, чтобы
  * не объяснять человеку вручную, что вводить в приложение.
@@ -769,13 +769,13 @@ private fun PasswordDetailsSheet(
     var qrBitmap by remember(entry.password) { mutableStateOf<android.graphics.Bitmap?>(null) }
     var unbindingDeviceId by remember(entry.password) { mutableStateOf<String?>(null) }
 
-    val qwdttLink = remember(entry, host, port) {
+    val glebsbpLink = remember(entry, host, port) {
         val peer = "$host:$port"
         val nameEsc = URLEncoder.encode(entry.label.ifBlank { entry.password }, "UTF-8")
         val peerEsc = URLEncoder.encode(peer, "UTF-8")
         val hashesEsc = URLEncoder.encode(entry.vkHash, "UTF-8")
         val passEsc = URLEncoder.encode(entry.password, "UTF-8")
-        "qwdtt://config?name=$nameEsc&peer=$peerEsc&hashes=$hashesEsc&workers=18&port=9000&pass=$passEsc"
+        "glebsbp://config?name=$nameEsc&peer=$peerEsc&hashes=$hashesEsc&workers=18&port=9000&pass=$passEsc"
     }
     val wdttLink = remember(entry, host, port) {
         // wdtt://<server_ip>:<dtls_port>:<wg_port>:<local_port>:<password>:<vk_hash>
@@ -784,9 +784,9 @@ private fun PasswordDetailsSheet(
         "wdtt://$host:$port:56001:9000:${entry.password}:${entry.vkHash}"
     }
 
-    LaunchedEffect(qwdttLink) {
+    LaunchedEffect(glebsbpLink) {
         scope.launch(Dispatchers.Default) {
-            val bmp = generateQrCode(qwdttLink, 600)
+            val bmp = generateQrCode(glebsbpLink, 600)
             withContext(Dispatchers.Main) { qrBitmap = bmp }
         }
     }
@@ -841,10 +841,10 @@ private fun PasswordDetailsSheet(
             }
 
             LinkRow(
-                label = "Ссылка qWDTT",
-                value = qwdttLink,
+                label = "Ссылка GLEBSBP",
+                value = glebsbpLink,
                 onCopy = {
-                    clipboard.setText(AnnotatedString(qwdttLink))
+                    clipboard.setText(AnnotatedString(glebsbpLink))
                 },
             )
             LinkRow(
